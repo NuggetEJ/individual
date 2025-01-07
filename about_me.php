@@ -12,7 +12,7 @@ include("config.php");
 </head>
 <body>
 	<div class="header">
-        <h1>About Me</h1>
+        <h1>About Me Hi</h1>
 	</div>
     
     <nav class="topnav" id="myTopnav">
