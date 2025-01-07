@@ -1,0 +1,94 @@
+CREATE TABLE `student` (
+  `matricNo` varchar(10) NOT NULL PRIMARY KEY,
+  `studName` varchar(255) NOT NULL,
+  `studEmail` varchar(255) NOT NULL UNIQUE,
+  `program` varchar(100) NOT NULL,
+  `intakeBatch` varchar(4) NOT NULL,
+  `phoneNo` varchar(12) NOT NULL,
+  `mentorName` varchar(255) NOT NULL,
+  `stateORigin` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `motto` varchar(255) NOT NULL,  
+  `profilePic` varchar(255) NOT NULL,
+  `pwd` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `confidential` (
+  `userID` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `pwd` VARCHAR(255) NOT NULL,
+  `registrationDate` DATE NOT NULL DEFAULT CURRENT_DATE(),
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `mykpi` (
+  `kpi_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `cgpa` DOUBLE(10,2),
+  `act_fac` INT(4),
+  `act_uni` INT(4),
+  `act_nat` INT(4),
+  `act_inter` INT(4),
+  `comp_fac` INT(4),
+  `comp_uni` INT(4),
+  `comp_nat` INT(4),
+  `comp_inter` INT(4),
+  `certificate` INT(4),
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `activity_kpi` (
+  `activity_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `sem` INT(2) NOT NULL,
+  `year` INT(2) NOT NULL,
+  `cgpa` DOUBLE(10,2) NOT NULL,
+  `faculty` INT(4) NOT NULL,
+  `university` INT(4) NOT NULL,
+  `national` INT(4) NOT NULL,
+  `international` INT(4) NOT NULL,
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `competition_kpi` (
+  `competition_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `sem` INT(2) NOT NULL,
+  `year` INT(2) NOT NULL,
+  `faculty` INT(4) NOT NULL,
+  `university` INT(4) NOT NULL,
+  `national` INT(4) NOT NULL,
+  `international` INT(4) NOT NULL,
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `certification_kpi` (
+  `certificate_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `sem` INT(2) NOT NULL,
+  `year` INT(2) NOT NULL,
+  `certificate` INT(4) NOT NULL,
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `activity` (
+  `actID` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `sem` INT(2) NOT NULL,
+  `year` VARCHAR(10) NOT NULL,
+  `activity` VARCHAR(255) NOT NULL,
+  `remark` VARCHAR(255),
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `challenge` (
+  `ch_id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `matricNo` VARCHAR(10) NOT NULL,
+  `sem` INT(2) NOT NULL,
+  `year` VARCHAR(10) NOT NULL,
+  `challenge` VARCHAR(255) NOT NULL,
+  `plan` VARCHAR(255) NOT NULL,
+  `remark` VARCHAR(255) NOT NULL,
+  `img_path` VARCHAR(255) NOT NULL,
+   FOREIGN KEY (matricNo) REFERENCES student(matricNo) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
